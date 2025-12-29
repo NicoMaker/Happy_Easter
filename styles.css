@@ -1,0 +1,808 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(to bottom, #ffd4e5, #ffe5f4, #e5f4ff);
+  overflow: hidden;
+  font-family: "Georgia", serif;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  touch-action: none;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* Tree container centered */
+.tree-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.6);
+  animation: treeSwing 5s ease-in-out infinite;
+  text-align: center;
+}
+
+@keyframes treeSwing {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.6) rotate(-2deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(0.6) rotate(2deg);
+  }
+}
+
+.tree {
+  position: relative;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.2));
+}
+
+.tree-layer {
+  margin: -25px auto;
+  position: relative;
+  animation: layerFloat 3.5s ease-in-out infinite;
+  border-radius: 50%;
+}
+
+.tree-layer:nth-child(2) {
+  animation-delay: 0s;
+}
+.tree-layer:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.tree-layer:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.tree-layer:nth-child(5) {
+  animation-delay: 0.45s;
+}
+
+@keyframes layerFloat {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.015);
+  }
+}
+
+.layer1 {
+  width: 150px;
+  height: 120px;
+  background: linear-gradient(135deg, #ffb3d9, #ff99cc);
+  border-radius: 50%;
+}
+
+.layer2 {
+  width: 210px;
+  height: 145px;
+  background: linear-gradient(135deg, #c5b3ff, #b8a6ff);
+  border-radius: 50%;
+}
+
+.layer3 {
+  width: 270px;
+  height: 170px;
+  background: linear-gradient(135deg, #ffeb99, #ffd966);
+  border-radius: 50%;
+}
+
+.layer4 {
+  width: 330px;
+  height: 195px;
+  background: linear-gradient(135deg, #b3f0ff, #99e6ff);
+  border-radius: 50%;
+}
+
+.trunk {
+  width: 55px;
+  height: 75px;
+  background: linear-gradient(to bottom, #ffa366, #ff8533);
+  margin: -10px auto 0;
+  border-radius: 0 0 12px 12px;
+  animation: trunkPulse 2.5s ease-in-out infinite;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes trunkPulse {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.03);
+  }
+}
+
+.star {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 70px;
+  animation: starSpin 4s linear infinite;
+  filter: drop-shadow(0 0 25px #ffb3d9) drop-shadow(0 0 45px #ff99cc);
+}
+
+@keyframes starSpin {
+  0% {
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateX(-50%) rotate(90deg) scale(1.2);
+  }
+  50% {
+    transform: translateX(-50%) rotate(180deg) scale(1.4);
+  }
+  75% {
+    transform: translateX(-50%) rotate(270deg) scale(1.2);
+  }
+  100% {
+    transform: translateX(-50%) rotate(360deg) scale(1);
+  }
+}
+
+/* Lights */
+.light {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  animation: lightPulse 1.2s ease-in-out infinite, colorChange 3s linear infinite;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes lightPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: brightness(1.2);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1.5);
+    filter: brightness(2);
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    background: radial-gradient(circle at 30% 30%, #ffb3d9, #ff99cc);
+    box-shadow: 0 0 25px #ff99cc, 0 0 45px #ff99cc80;
+  }
+  20% {
+    background: radial-gradient(circle at 30% 30%, #c5b3ff, #b8a6ff);
+    box-shadow: 0 0 25px #b8a6ff, 0 0 45px #b8a6ff80;
+  }
+  40% {
+    background: radial-gradient(circle at 30% 30%, #ffeb99, #ffd966);
+    box-shadow: 0 0 25px #ffd966, 0 0 45px #ffd96680;
+  }
+  60% {
+    background: radial-gradient(circle at 30% 30%, #b3f0ff, #99e6ff);
+    box-shadow: 0 0 25px #99e6ff, 0 0 45px #99e6ff80;
+  }
+  80% {
+    background: radial-gradient(circle at 30% 30%, #ffccb3, #ffb399);
+    box-shadow: 0 0 25px #ffb399, 0 0 45px #ffb39980;
+  }
+  100% {
+    background: radial-gradient(circle at 30% 30%, #ffb3d9, #ff99cc);
+    box-shadow: 0 0 25px #ff99cc, 0 0 45px #ff99cc80;
+  }
+}
+
+.light.red {
+  animation-delay: 0s, 0s;
+}
+.light.blue {
+  animation-delay: 0.6s, 0.6s;
+}
+.light.yellow {
+  animation-delay: 1.2s, 1.2s;
+}
+.light.green {
+  animation-delay: 1.8s, 1.8s;
+}
+.light.pink {
+  animation-delay: 2.4s, 2.4s;
+}
+
+/* Santa (now Bunny) */
+.santa-container {
+  position: absolute;
+  top: 5%;
+  right: -300px;
+  animation: santaFly 18s linear infinite;
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 100;
+}
+
+@keyframes santaFly {
+  0% {
+    right: -300px;
+  }
+  100% {
+    right: 110%;
+  }
+}
+
+.reindeer-group {
+  font-size: 45px;
+  animation: reindeerBounce 0.6s ease-in-out infinite;
+}
+
+@keyframes reindeerBounce {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.sleigh {
+  font-size: 55px;
+  animation: sleighRock 0.6s ease-in-out infinite;
+}
+
+@keyframes sleighRock {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+.santa {
+  font-size: 65px;
+  animation: santaBounce 0.6s ease-in-out infinite;
+}
+
+@keyframes santaBounce {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-3deg);
+  }
+}
+
+/* Message */
+.message {
+  position: relative;
+  margin-top: 80px;
+  font-size: 110px;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff99cc, #b8a6ff, #ffd966, #99e6ff, #ffb399, #ff99cc);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: messageGlow 4s ease infinite, messageBounce 2.5s ease-in-out infinite;
+  letter-spacing: 12px;
+  filter: drop-shadow(0 0 50px rgba(255, 182, 217, 0.8));
+}
+
+@keyframes messageGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes messageBounce {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-12px) scale(1.08);
+  }
+}
+
+.snowflake {
+  position: absolute;
+  font-size: 32px;
+  opacity: 0.95;
+  animation: snowFall linear infinite;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes snowFall {
+  0% {
+    top: -10%;
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  10% {
+    opacity: 0.95;
+  }
+  90% {
+    opacity: 0.95;
+  }
+  100% {
+    top: 110%;
+    opacity: 0;
+    transform: rotate(360deg);
+  }
+}
+
+/* Presents (now Easter baskets) */
+.present {
+  position: absolute;
+  bottom: 50px;
+  animation: presentWiggle 2.2s ease-in-out infinite;
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+  z-index: 50;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@keyframes presentWiggle {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-6deg) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) rotate(6deg) scale(1.12);
+  }
+}
+
+/* Wreath (now flower) */
+.wreath {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 80px;
+  animation: wreathSpin 8s linear infinite;
+  filter: drop-shadow(0 5px 15px rgba(255, 182, 217, 0.4));
+  z-index: 100;
+}
+
+@keyframes wreathSpin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.ornament {
+  position: absolute;
+  animation: ornamentSwing 3.5s ease-in-out infinite;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes ornamentSwing {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(-12deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(12deg);
+  }
+}
+
+/* ========================================
+   MOBILE RESPONSIVE - OTTIMIZZATO
+   ======================================== */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .tree-container {
+    transform: translate(-50%, -52%) scale(0.55);
+  }
+
+  @keyframes treeSwing {
+    0%,
+    100% {
+      transform: translate(-50%, -52%) scale(0.55) rotate(-2deg);
+    }
+    50% {
+      transform: translate(-50%, -52%) scale(0.55) rotate(2deg);
+    }
+  }
+
+  .message {
+    font-size: 75px;
+    letter-spacing: 8px;
+    margin-top: 65px;
+  }
+
+  .santa-container {
+    transform: scale(0.65);
+    top: 8%;
+  }
+
+  .present {
+    font-size: 55px !important;
+    bottom: 35px;
+  }
+
+  .wreath {
+    font-size: 65px;
+    top: 15px;
+    right: 15px;
+  }
+
+  .snowflake {
+    font-size: 26px;
+  }
+}
+
+/* Mobile grande (iPhone 12 Pro Max, Samsung S21+) */
+@media (max-width: 480px) {
+  .tree-container {
+    transform: translate(-50%, -48%) scale(0.52);
+  }
+
+  @keyframes treeSwing {
+    0%,
+    100% {
+      transform: translate(-50%, -48%) scale(0.52) rotate(-2deg);
+    }
+    50% {
+      transform: translate(-50%, -48%) scale(0.52) rotate(2deg);
+    }
+  }
+
+  .message {
+    font-size: 62px;
+    letter-spacing: 5px;
+    margin-top: 58px;
+    white-space: nowrap;
+  }
+
+  .santa-container {
+    transform: scale(0.6);
+    top: 10%;
+  }
+
+  .present {
+    font-size: 50px !important;
+    bottom: 30px;
+  }
+
+  .wreath {
+    font-size: 55px;
+    top: 12px;
+    right: 12px;
+  }
+
+  .snowflake {
+    font-size: 24px;
+  }
+
+  .star {
+    font-size: 62px;
+  }
+
+  .light {
+    width: 14px;
+    height: 14px;
+  }
+
+  .ornament {
+    font-size: 22px !important;
+  }
+}
+
+/* Mobile standard (iPhone 13/14, Pixel) */
+@media (max-width: 430px) {
+  .tree-container {
+    transform: translate(-50%, -46%) scale(0.5);
+  }
+
+  @keyframes treeSwing {
+    0%,
+    100% {
+      transform: translate(-50%, -46%) scale(0.5) rotate(-2deg);
+    }
+    50% {
+      transform: translate(-50%, -46%) scale(0.5) rotate(2deg);
+    }
+  }
+
+  .message {
+    font-size: 58px;
+    letter-spacing: 4px;
+    margin-top: 55px;
+  }
+
+  .present {
+    font-size: 48px !important;
+    bottom: 28px;
+  }
+
+  .wreath {
+    font-size: 52px;
+  }
+
+  .snowflake {
+    font-size: 22px;
+  }
+}
+
+/* Mobile medio (iPhone 12/13 mini) */
+@media (max-width: 390px) {
+  .tree-container {
+    transform: translate(-50%, -44%) scale(0.48);
+  }
+
+  @keyframes treeSwing {
+    0%,
+    100% {
+      transform: translate(-50%, -44%) scale(0.48) rotate(-2deg);
+    }
+    50% {
+      transform: translate(-50%, -44%) scale(0.48) rotate(2deg);
+    }
+  }
+
+  .message {
+    font-size: 54px;
+    letter-spacing: 3px;
+    margin-top: 52px;
+  }
+
+  .santa-container {
+    transform: scale(0.52);
+  }
+
+  .present {
+    font-size: 45px !important;
+    bottom: 25px;
+  }
+
+  .wreath {
+    font-size: 48px;
+  }
+
+  .star {
+    font-size: 58px;
+  }
+
+  .snowflake {
+    font-size: 21px;
+  }
+}
+
+/* Mobile piccolo (iPhone SE 2020/2022) */
+@media (max-width: 375px) {
+  .tree-container {
+    transform: translate(-50%, -42%) scale(0.46);
+  }
+
+  @keyframes treeSwing {
+    0%,
+    100% {
+      transform: translate(-50%, -42%) scale(0.46) rotate(-2deg);
+    }
+    50% {
+      transform: translate(-50%, -42%) scale(0.46) rotate(2deg);
+    }
+  }
+
+  .message {
+    font-size: 50px;
+    letter-spacing: 2px;
+    margin-top: 50px;
+  }
+
+  .santa-container {
+    transform: scale(0.48);
+  }
+
+  .present {
+    font-size: 42px !important;
+    bottom: 22px;
+  }
+
+  .wreath {
+    font-size: 45px;
+    top: 10px;
+    right: 10px;
+  }
+
+  .star {
+    font-size: 54px;
+  }
+
+  .light {
+    width: 13px;
+    height: 13px;
+  }
+
+  .ornament {
+    font-size: 21px !important;
+  }
+
+  .snowflake {
+    font-size: 20px;
+  }
+}
+
+/* Mobile molto piccolo (iPhone SE 1st gen) */
+@media (max-width: 320px) {
+  .tree-container {
+    transform: translate(-50%, -40%) scale(0.42);
+  }
+
+  @keyframes treeSwing {
+    0%,
+    100% {
+      transform: translate(-50%, -40%) scale(0.42) rotate(-2deg);
+    }
+    50% {
+      transform: translate(-50%, -40%) scale(0.42) rotate(2deg);
+    }
+  }
+
+  .message {
+    font-size: 44px;
+    letter-spacing: 1px;
+    margin-top: 46px;
+  }
+
+  .santa-container {
+    transform: scale(0.42);
+  }
+
+  .present {
+    font-size: 28px !important;
+    bottom: 18px;
+  }
+
+  .star {
+    font-size: 48px;
+  }
+
+  .light {
+    width: 11px;
+    height: 11px;
+  }
+
+  .ornament {
+    font-size: 19px !important;
+  }
+
+  .snowflake {
+    font-size: 18px;
+  }
+}
+
+/* Landscape mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .tree-container {
+    transform: translate(-50%, -48%) scale(0.38);
+  }
+
+  @keyframes treeSwing {
+    0%,
+    100% {
+      transform: translate(-50%, -48%) scale(0.38) rotate(-2deg);
+    }
+    50% {
+      transform: translate(-50%, -48%) scale(0.38) rotate(2deg);
+    }
+  }
+
+  .message {
+    font-size: 36px;
+    letter-spacing: 2px;
+    margin-top: 42px;
+  }
+
+  .santa-container {
+    transform: scale(0.42);
+    top: 5%;
+  }
+
+  .present {
+    font-size: 26px !important;
+    bottom: 15px;
+  }
+
+  .snowflake {
+    font-size: 16px;
+  }
+
+  .star {
+    font-size: 48px;
+  }
+
+  .light {
+    width: 12px;
+    height: 12px;
+  }
+
+  .ornament {
+    font-size: 19px !important;
+  }
+}
+
+/* Landscape molto basso */
+@media (max-height: 400px) and (orientation: landscape) {
+  .tree-container {
+    transform: translate(-50%, -45%) scale(0.32);
+  }
+
+  @keyframes treeSwing {
+    0%,
+    100% {
+      transform: translate(-50%, -45%) scale(0.32) rotate(-2deg);
+    }
+    50% {
+      transform: translate(-50%, -45%) scale(0.32) rotate(2deg);
+    }
+  }
+
+  .message {
+    font-size: 30px;
+    letter-spacing: 1px;
+    margin-top: 35px;
+  }
+
+  .santa-container {
+    transform: scale(0.35);
+    top: 3%;
+  }
+
+  .present {
+    font-size: 22px !important;
+    bottom: 10px;
+  }
+
+  .snowflake {
+    font-size: 14px;
+  }
+
+  .star {
+    font-size: 42px;
+  }
+
+  .light {
+    width: 10px;
+    height: 10px;
+  }
+
+  .ornament {
+    font-size: 17px !important;
+  }
+}
